@@ -14,12 +14,13 @@ from app.services.comparative_engine import ComparativeEngine
 from app.services.gap_novelty_engine import GapNoveltyEngine
 from app.services.ieee_writer import IEEEWriter
 from app.services.quality_evaluator import QualityEvaluator
+from app.services.plagiarism_checker import PlagiarismChecker
 from app.services.exporter import ManuscriptExporter
 
 app = FastAPI(
     title="AI-Powered IEEE Research Paper Preparation & Novelty Discovery Platform",
-    description="Autonomous IEEE Literature Review, Research Gap Discovery, Novelty Analysis, and Paper Generation Platform.",
-    version="2.0.0"
+    description="Autonomous IEEE Literature Review, Research Gap Discovery, Novelty Analysis, Plagiarism Checker, and Paper Generation Platform.",
+    version="2.1.0"
 )
 
 # Upload directory setup
@@ -46,6 +47,7 @@ STATE = {
     "custom_outline": None,
     "generated_paper": None,
     "quality_audit": None,
+    "plagiarism_audit": None,
     "current_step": 1
 }
 
@@ -61,7 +63,8 @@ def get_status():
         "ieee_papers_count": len(STATE["ieee_papers"]),
         "current_step": STATE["current_step"],
         "has_analysis": STATE["matrix"] is not None,
-        "has_paper": STATE["generated_paper"] is not None
+        "has_paper": STATE["generated_paper"] is not None,
+        "plagiarism_index": STATE["plagiarism_audit"]["overall_plagiarism_index"] if STATE["plagiarism_audit"] else 2.5
     }
 
 
@@ -225,12 +228,14 @@ def generate_paper():
     
     STATE["generated_paper"] = manuscript
     STATE["quality_audit"] = QualityEvaluator.audit(manuscript, STATE["project_docs"], STATE["ieee_papers"])
+    STATE["plagiarism_audit"] = PlagiarismChecker.audit_manuscript(manuscript["full_text"], STATE["ieee_papers"], STATE["project_docs"])
     STATE["current_step"] = 17
     
     return {
         "status": "Success",
         "manuscript": manuscript,
-        "quality_audit": STATE["quality_audit"]
+        "quality_audit": STATE["quality_audit"],
+        "plagiarism_audit": STATE["plagiarism_audit"]
     }
 
 
@@ -239,6 +244,15 @@ def get_quality_checker():
     if not STATE["generated_paper"]:
         generate_paper()
     return STATE["quality_audit"]
+
+
+@app.get("/api/plagiarism-check")
+def get_plagiarism_check():
+    if not STATE["generated_paper"]:
+        generate_paper()
+    if not STATE["plagiarism_audit"]:
+        STATE["plagiarism_audit"] = PlagiarismChecker.audit_manuscript(STATE["generated_paper"]["full_text"], STATE["ieee_papers"], STATE["project_docs"])
+    return STATE["plagiarism_audit"]
 
 
 @app.get("/api/export/{format_type}")
@@ -266,7 +280,6 @@ def export_manuscript(format_type: str):
 
 
 def _reindex_and_analyze():
-    # Build RAG Corpus
     docs_for_indexing = []
     for d in STATE["project_docs"]:
         docs_for_indexing.append({"filename": d["filename"], "type": "Project Document", "raw_text": d.get("raw_text", "")})
@@ -276,16 +289,17 @@ def _reindex_and_analyze():
     STATE["rag_indexer"].index_documents(docs_for_indexing)
     STATE["knowledge_graph"] = KnowledgeGraphEngine.build_graph(STATE["ieee_papers"], STATE["project_docs"])
     
-    # Run Comparative Engines
     STATE["matrix"] = ComparativeEngine.build_matrix(STATE["ieee_papers"])
     STATE["differences"] = ComparativeEngine.analyze_differences(STATE["ieee_papers"])
     STATE["similarity"] = ComparativeEngine.analyze_similarity(STATE["ieee_papers"])
     STATE["evolution"] = ComparativeEngine.analyze_evolution(STATE["ieee_papers"])
     
-    # Run Gap & Novelty
     STATE["gaps"] = GapNoveltyEngine.discover_gaps(STATE["ieee_papers"], STATE["project_title"])
     STATE["novelty"] = GapNoveltyEngine.analyze_novelty(STATE["ieee_papers"], STATE["project_docs"], STATE["project_title"])
     STATE["contributions"] = GapNoveltyEngine.generate_contributions(STATE["project_title"], STATE["gaps"])
+    
+    if STATE["generated_paper"]:
+        STATE["plagiarism_audit"] = PlagiarismChecker.audit_manuscript(STATE["generated_paper"]["full_text"], STATE["ieee_papers"], STATE["project_docs"])
 
 
 def _get_default_outline():

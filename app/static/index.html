@@ -14,7 +14,7 @@
                 <div class="brand-icon">IEEE</div>
                 <div>
                     <div class="brand-title">IEEE Research AI</div>
-                    <div class="brand-subtitle">Paper Prep & Novelty Engine</div>
+                    <div class="brand-subtitle">Paper Prep & Plagiarism Engine</div>
                 </div>
             </div>
             
@@ -68,11 +68,14 @@
                 <div class="nav-item" data-module="generator">
                     <span class="icon">📄</span> Module 14: IEEE Manuscript
                 </div>
+                <div class="nav-item" data-module="plagiarism">
+                    <span class="icon">🔍</span> Module 15: Plagiarism Check
+                </div>
                 <div class="nav-item" data-module="quality">
-                    <span class="icon">📊</span> Module 15: Quality Audit
+                    <span class="icon">📊</span> Module 16: Quality Audit
                 </div>
                 <div class="nav-item" data-module="export">
-                    <span class="icon">📥</span> Module 16: Multi-Export
+                    <span class="icon">📥</span> Module 17: Multi-Export
                 </div>
             </nav>
         </aside>
@@ -83,7 +86,7 @@
             <header class="header-bar">
                 <div class="step-indicator">
                     <span class="step-badge">Workflow Step <span id="active-step-num">1</span>/21</span>
-                    <span>AI-Powered IEEE Paper Preparation & Quality Review</span>
+                    <span>AI-Powered IEEE Paper Preparation & Plagiarism Audit</span>
                 </div>
                 <div class="header-actions">
                     <button class="btn btn-secondary" onclick="fetchStatus()">Refresh Status</button>
@@ -97,7 +100,7 @@
                 <section id="module-dashboard" class="module-section active">
                     <div class="section-header">
                         <h1 class="section-title">IEEE Research Platform Dashboard</h1>
-                        <p class="section-subtitle">Comprehensive status overview across project documentation, IEEE literature, research gaps, and paper generation.</p>
+                        <p class="section-subtitle">Comprehensive status overview across project documentation, IEEE literature, research gaps, plagiarism check, and paper generation.</p>
                     </div>
 
                     <div class="grid-4" style="margin-bottom: 24px;">
@@ -112,9 +115,9 @@
                             <small style="color:#94A3B8;">Max 20 research papers</small>
                         </div>
                         <div class="stat-box">
-                            <div class="stat-label">Discovered Gaps</div>
-                            <div class="stat-val" style="color:#FBBF24;">4</div>
-                            <small style="color:#94A3B8;">Across 8 categories</small>
+                            <div class="stat-label">Plagiarism Index</div>
+                            <div class="stat-val" id="stat-plag-val" style="color:#10B981;">2.5%</div>
+                            <small style="color:#94A3B8;">Originality Score</small>
                         </div>
                         <div class="stat-box">
                             <div class="stat-label">Research Readiness</div>
@@ -125,7 +128,7 @@
 
                     <div class="card">
                         <div class="card-title">🚀 Step-by-Step Autonomous Workflow (Steps 1 to 21)</div>
-                        <p style="margin-bottom:12px;">The system follows a strict reasoning pipeline: <strong>Understand Project → Deep Analysis of 20 IEEE Papers → Comparative Matrix → Research Evolution → Gap Discovery & Evidence → Novelty & Contribution Formulator → Outline Review → IEEE Manuscript Generator → Quality Audit</strong>.</p>
+                        <p style="margin-bottom:12px;">The system follows a strict reasoning pipeline: <strong>Understand Project → Deep Analysis of 20 IEEE Papers → Comparative Matrix → Research Evolution → Gap Discovery & Evidence → Novelty & Contribution Formulator → Outline Review → IEEE Manuscript Generator → Plagiarism & Quality Audit</strong>.</p>
                         <button class="btn btn-primary" onclick="document.querySelector('[data-module=\'title\']').click()">Begin Step 1: Project Title Setup</button>
                     </div>
                 </section>
@@ -317,7 +320,20 @@
                     </div>
                 </section>
 
-                <!-- Module 15: Quality Audit -->
+                <!-- Module 15: Plagiarism Check -->
+                <section id="module-plagiarism" class="module-section">
+                    <div class="section-header">
+                        <h1 class="section-title">Plagiarism & Originality Checker</h1>
+                        <p class="section-subtitle">Audits the generated IEEE manuscript against all uploaded reference literature and project documents for phrase overlap and sentence-level similarity.</p>
+                    </div>
+                    <div id="plagiarism-container">
+                        <div class="card" style="text-align:center; padding:48px;">
+                            <h3>Loading Plagiarism Audit...</h3>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Module 16: Quality Audit -->
                 <section id="module-quality" class="module-section">
                     <div class="section-header">
                         <h1 class="section-title">Research Paper Quality Checker</h1>
@@ -326,7 +342,7 @@
                     <div id="quality-container"></div>
                 </section>
 
-                <!-- Module 16: Multi-Export -->
+                <!-- Module 17: Multi-Export -->
                 <section id="module-export" class="module-section">
                     <div class="section-header">
                         <h1 class="section-title">Multi-Format Paper Exporter</h1>

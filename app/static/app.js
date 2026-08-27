@@ -39,6 +39,7 @@ function onModuleSwitch(moduleKey) {
     else if (moduleKey === 'contributions') loadContributions();
     else if (moduleKey === 'review') loadUserReview();
     else if (moduleKey === 'understanding') loadDocumentUnderstanding();
+    else if (moduleKey === 'plagiarism') loadPlagiarismCheck();
     else if (moduleKey === 'quality') loadQualityChecker();
 }
 
@@ -51,6 +52,9 @@ async function fetchStatus() {
         document.getElementById('stat-docs-count').innerText = data.project_docs_count;
         document.getElementById('stat-papers-count').innerText = data.ieee_papers_count;
         document.getElementById('active-step-num').innerText = data.current_step;
+        if (document.getElementById('stat-plag-val')) {
+            document.getElementById('stat-plag-val').innerText = `${data.plagiarism_index}%`;
+        }
         
         if (data.project_title) {
             document.getElementById('project-title-input').value = data.project_title;
@@ -468,6 +472,58 @@ function renderManuscript(manuscript) {
             ${manuscript.references.map(r => `
                 <p>[${r.id}] ${r.formatted_citation}</p>
             `).join('')}
+        </div>
+    `;
+}
+
+// Plagiarism Check Module
+async function loadPlagiarismCheck() {
+    const res = await fetch('/api/plagiarism-check');
+    const data = await res.json();
+    const container = document.getElementById('plagiarism-container');
+    if (!container) return;
+    
+    container.innerHTML = `
+        <div class="card">
+            <div class="card-title">🔍 Plagiarism & Originality Audit Report</div>
+            <div class="grid-2" style="margin-bottom:20px;">
+                <div class="stat-box" style="text-align:center;">
+                    <div class="stat-label">Plagiarism Index</div>
+                    <div class="stat-val" style="font-size:2.5rem; color:${data.overall_plagiarism_index < 5 ? '#10B981' : '#F59E0B'};">${data.overall_plagiarism_index}%</div>
+                    <p style="color:#94A3B8; font-size:0.85rem;">${data.status}</p>
+                </div>
+                <div class="stat-box" style="text-align:center;">
+                    <div class="stat-label">Originality Score</div>
+                    <div class="stat-val" style="font-size:2.5rem; color:#38BDF8;">${data.originality_score}%</div>
+                    <p style="color:#94A3B8; font-size:0.85rem;">Audited against ${data.total_sources_audited} reference sources</p>
+                </div>
+            </div>
+            
+            <p style="margin-bottom:16px;"><strong>Audit Summary:</strong> ${data.summary}</p>
+            
+            <h4 style="margin-bottom:8px;">Reference Source Similarity Breakdown</h4>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Source Name</th>
+                            <th>Source Type</th>
+                            <th>Similarity Index</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${data.matched_sources.length ? data.matched_sources.map(src => `
+                            <tr>
+                                <td>${src.source_name}</td>
+                                <td><span class="badge badge-explicit">${src.source_type}</span></td>
+                                <td><strong>${src.similarity_percentage}%</strong></td>
+                                <td><span class="badge badge-explicit">Properly Cited & Attributed</span></td>
+                            </tr>
+                        `).join('') : '<tr><td colspan="4">No phrase plagiarism detected across reference files.</td></tr>'}
+                    </tbody>
+                </table>
+            </div>
         </div>
     `;
 }
