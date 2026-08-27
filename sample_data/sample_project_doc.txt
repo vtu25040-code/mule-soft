@@ -1,0 +1,23 @@
+PROJECT PROPOSAL & TECHNICAL DOCUMENTATION
+Title: AI-Based Plant Disease Detection Using Deep Learning
+Authors: Project Research Team
+
+BACKGROUND & PROBLEM STATEMENT:
+Agricultural crop losses due to plant diseases affect worldwide food security. Traditional manual visual inspection by agricultural experts is subjective, slow, and non-scalable for smallholder farmers in remote regions. Current computer vision systems deployed on smartphones suffer high latency and false positive rates when leaf images contain shadows, soil noise, or dynamic outdoor lighting.
+
+PROPOSED SYSTEM ARCHITECTURE:
+We propose an end-to-end lightweight AI framework combining a custom pruned ResNet-50 backbone with spatial attention gates. The system processes RGB leaf images acquired via low-cost mobile camera sensors, performs real-time background segment removal using Otsu thresholding, and classifies 38 plant disease categories.
+
+METHODOLOGY & ALGORITHMS:
+1. Input Image Preprocessing: Contrast Limited Adaptive Histogram Equalization (CLAHE) to handle variable outdoor illumination.
+2. Model Architecture: Pruned Attention ResNet-50 with Depthwise Separable Convolutions to minimize memory footprint.
+3. Quantization: INT8 post-training quantization for deployment on Raspberry Pi 4 / mobile edge devices.
+
+EXPERIMENTAL DATASET:
+The model was trained on the benchmark PlantVillage dataset (54,305 images) augmented with 3,500 real-world field-collected leaf samples featuring background noise and varying weather conditions.
+
+RESULTS OBTAINED:
+- Classification Accuracy: 97.4% on clean benchmark images, 92.8% on field-collected noisy images.
+- Precision: 96.8%, Recall: 97.1%, F1-Score: 96.95%.
+- Model Size: 14.2 MB (reduced from 98 MB).
+- Real-Time Inference Latency: 28 ms per image on Raspberry Pi 4.

@@ -1,0 +1,18 @@
+Title: Deep Learning for Plant Disease Recognition: A Comprehensive Benchmark Analysis
+Authors: J. Smith, R. Davis, M. Kumar
+Venue: IEEE Transactions on Agricultural Informatics, 2022
+DOI: 10.1109/TAI.2022.1098234
+
+ABSTRACT:
+Automated crop disease recognition using deep convolutional neural networks has demonstrated promising results. In this paper, we evaluate VGG-16, ResNet-50, and DenseNet-121 architectures across standard plant pathology benchmarks. Our findings indicate DenseNet-121 achieves an overall accuracy of 96.2% on pristine laboratory datasets. However, model parameter size exceeds 120 MB, rendering mobile edge deployment challenging.
+
+RESEARCH PROBLEM:
+High computational memory requirements of deep CNN models prevent deployment on low-cost agricultural sensors.
+
+METHODOLOGY & ALGORITHMS:
+Evaluated VGG-16, ResNet-50, and DenseNet-121 on PlantVillage dataset using standard SGD optimization, cross-entropy loss, and static 224x224 RGB image resizing.
+
+LIMITATIONS:
+1. Evaluation restricted to laboratory images with uniform white backgrounds.
+2. High model latency (180 ms) on unaccelerated embedded hardware.
+3. Lack of real-world field validation under ambient outdoor lighting.

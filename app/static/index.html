@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered IEEE Research Preparation & Novelty Discovery Platform</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-icon">IEEE</div>
+                <div>
+                    <div class="brand-title">IEEE Research AI</div>
+                    <div class="brand-subtitle">Paper Prep & Novelty Engine</div>
+                </div>
+            </div>
+            
+            <nav class="module-nav">
+                <div class="nav-category">Core Application Modules</div>
+                <div class="nav-item active" data-module="dashboard">
+                    <span class="icon">📊</span> Module 1: Dashboard
+                </div>
+                <div class="nav-item" data-module="title">
+                    <span class="icon">📝</span> Module 2: Project Title
+                </div>
+                <div class="nav-item" data-module="proj-docs">
+                    <span class="icon">📁</span> Module 3: Project Documents
+                </div>
+                <div class="nav-item" data-module="ieee-papers">
+                    <span class="icon">📚</span> Module 4: IEEE References
+                </div>
+                <div class="nav-item" data-module="understanding">
+                    <span class="icon">🔎</span> Module 5: Doc Understanding
+                </div>
+
+                <div class="nav-category">Comparative Analysis</div>
+                <div class="nav-item" data-module="matrix">
+                    <span class="icon">📋</span> Module 6: 20-Paper Matrix
+                </div>
+                <div class="nav-item" data-module="difference">
+                    <span class="icon">⚖️</span> Module 7: Difference Analysis
+                </div>
+                <div class="nav-item" data-module="similarity">
+                    <span class="icon">🏷️</span> Module 8: Similarity Analysis
+                </div>
+                <div class="nav-item" data-module="evolution">
+                    <span class="icon">⏳</span> Module 9: Research Evolution
+                </div>
+
+                <div class="nav-category">Gap & Novelty Engine</div>
+                <div class="nav-item" data-module="gaps">
+                    <span class="icon">🎯</span> Module 10: Research Gaps
+                </div>
+                <div class="nav-item" data-module="novelty">
+                    <span class="icon">✨</span> Module 11: Novelty Analysis
+                </div>
+                <div class="nav-item" data-module="contributions">
+                    <span class="icon">💡</span> Module 12: Contributions
+                </div>
+
+                <div class="nav-category">Synthesis & Writing</div>
+                <div class="nav-item" data-module="review">
+                    <span class="icon">📋</span> Module 13: Pre-Gen Review
+                </div>
+                <div class="nav-item" data-module="generator">
+                    <span class="icon">📄</span> Module 14: IEEE Manuscript
+                </div>
+                <div class="nav-item" data-module="quality">
+                    <span class="icon">📊</span> Module 15: Quality Audit
+                </div>
+                <div class="nav-item" data-module="export">
+                    <span class="icon">📥</span> Module 16: Multi-Export
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Wrapper -->
+        <main class="main-wrapper">
+            <!-- Header Bar -->
+            <header class="header-bar">
+                <div class="step-indicator">
+                    <span class="step-badge">Workflow Step <span id="active-step-num">1</span>/21</span>
+                    <span>AI-Powered IEEE Paper Preparation & Quality Review</span>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-secondary" onclick="fetchStatus()">Refresh Status</button>
+                    <button class="btn btn-primary" onclick="triggerPaperGeneration()">Generate Manuscript</button>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Module 1: Dashboard -->
+                <section id="module-dashboard" class="module-section active">
+                    <div class="section-header">
+                        <h1 class="section-title">IEEE Research Platform Dashboard</h1>
+                        <p class="section-subtitle">Comprehensive status overview across project documentation, IEEE literature, research gaps, and paper generation.</p>
+                    </div>
+
+                    <div class="grid-4" style="margin-bottom: 24px;">
+                        <div class="stat-box">
+                            <div class="stat-label">Project Documents</div>
+                            <div class="stat-val" id="stat-docs-count">0</div>
+                            <small style="color:#94A3B8;">Max 20 documents</small>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">IEEE Reference Papers</div>
+                            <div class="stat-val" id="stat-papers-count">0</div>
+                            <small style="color:#94A3B8;">Max 20 research papers</small>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Discovered Gaps</div>
+                            <div class="stat-val" style="color:#FBBF24;">4</div>
+                            <small style="color:#94A3B8;">Across 8 categories</small>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Research Readiness</div>
+                            <div class="stat-val" style="color:#10B981;">8.4 / 10</div>
+                            <small style="color:#94A3B8;">Audit Score</small>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-title">🚀 Step-by-Step Autonomous Workflow (Steps 1 to 21)</div>
+                        <p style="margin-bottom:12px;">The system follows a strict reasoning pipeline: <strong>Understand Project → Deep Analysis of 20 IEEE Papers → Comparative Matrix → Research Evolution → Gap Discovery & Evidence → Novelty & Contribution Formulator → Outline Review → IEEE Manuscript Generator → Quality Audit</strong>.</p>
+                        <button class="btn btn-primary" onclick="document.querySelector('[data-module=\'title\']').click()">Begin Step 1: Project Title Setup</button>
+                    </div>
+                </section>
+
+                <!-- Module 2: Project Title -->
+                <section id="module-title" class="module-section">
+                    <div class="section-header">
+                        <h1 class="section-title">Project Title Module</h1>
+                        <p class="section-subtitle">Enter your project title to automatically identify research domain, subdomains, technical problems, keywords, metrics, and initial research gaps.</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-title">Enter Project Title</div>
+                        <div style="display:flex; gap:12px; margin-bottom:16px;">
+                            <input type="text" id="project-title-input" class="form-control" style="flex:1; padding:10px; border-radius:6px; border:1px solid #334155; background:#0F172A; color:white;" placeholder="e.g. AI-Based Plant Disease Detection Using Deep Learning">
+                            <button class="btn btn-primary" onclick="analyzeTitle()">Analyze Title</button>
+                        </div>
+                    </div>
+
+                    <div id="title-analysis-container"></div>
+                </section>
+
+                <!-- Module 3: Project Documents -->
+                <section id="module-proj-docs" class="module-section">
+                    <div class="section-header">
+                        <h1 class="section-title">Project Document Upload Module</h1>
+                        <p class="section-subtitle">Upload up to 20 project documents (PDF, DOCX, PPTX, XLSX, CSV, TXT, Images) describing your actual project.</p>
+                    </div>
+
+                    <div class="dropzone" id="proj-dropzone">
+                        <div class="dropzone-icon">📁</div>
+                        <div class="dropzone-text">Drag & Drop Project Documents Here</div>
+                        <div class="dropzone-hint">Supports PDF, DOCX, PPTX, XLSX, CSV, TXT, JPG, PNG (Up to 20 files)</div>
+                        <input type="file" id="proj-file-input" style="display:none;">
+                    </div>
+
+                    <div class="card">
+                        <div class="card-title">Uploaded Project Documents</div>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Document Name</th>
+                                        <th>Type</th>
+                                        <th>Size</th>
+                                        <th>Upload Status</th>
+                                        <th>Analysis Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="proj-docs-list">
+                                    <tr><td colspan="6">Loading uploaded documents...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Module 4: IEEE Reference Papers -->
+                <section id="module-ieee-papers" class="module-section">
+                    <div class="section-header">
+                        <h1 class="section-title">IEEE Reference Paper Upload Module</h1>
+                        <p class="section-subtitle">Upload up to 20 IEEE/research papers related to your research field for comparative analysis and gap discovery.</p>
+                    </div>
+
+                    <div class="dropzone" id="ieee-dropzone">
+                        <div class="dropzone-icon">📚</div>
+                        <div class="dropzone-text">Drag & Drop IEEE Research Papers Here</div>
+                        <div class="dropzone-hint">Supports PDF, DOCX, TXT (Up to 20 reference papers)</div>
+                        <input type="file" id="ieee-file-input" style="display:none;">
+                    </div>
+
+                    <div class="card">
+                        <div class="card-title">Uploaded IEEE Reference Papers</div>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Paper No.</th>
+                                        <th>Paper Title</th>
+                                        <th>Authors</th>
+                                        <th>Year</th>
+                                        <th>Venue</th>
+                                        <th>DOI</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="ieee-papers-list">
+                                    <tr><td colspan="7">Loading uploaded reference papers...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Module 5: Document Understanding -->
+                <section id="module-understanding" class="module-section">
+                    <div class="section-header">
+                        <h1 class="section-title">Document Understanding Engine</h1>
+                        <p class="section-subtitle">Extracted bibliographic, research, and technical data explicitly tagged as Explicitly Stated vs AI-Inferred.</p>
+                    </div>
+                    <div id="document-understanding-container"></div>
+                </section>
+
+                <!-- Module 6: 20-Paper Matrix -->
+                <section id="module-matrix" class="module-section">
+                    <div class="section-header">
+                        <h1 class="section-title">20-Paper Comparative Analysis Matrix</h1>
+                        <p class="section-subtitle">Comprehensive 16-parameter comparison matrix across all reference papers. Scroll horizontally to view all papers.</p>
+                    </div>
+                    <div id="matrix-container"></div>
+                </section>
+
+                <!-- Module 7: Difference Analysis -->
+                <section id="module-difference" class="module-section">
+                    <div class="section-header">
+                        <h1 class="section-title">Paper-by-Paper Technical Difference Analysis</h1>
+                        <p class="section-subtitle">Pairwise technical comparisons explaining the technical significance of differences between studies.</p>
+                    </div>
+                    <div id="difference-container"></div>
+                </section>
+
+                <!-- Module 8: Similarity Analysis -->
+                <section id="module-similarity" class="module-section">
+                    <div class="section-header">
+                        <h1 class="section-title">Methodological Similarity Clustering</h1>
+                        <p class="section-subtitle">Dynamic categorization of papers based on underlying neural architectures, dataset types, and algorithms.</p>
+                    </div>
+                    <div id="similarity-container"></div>
+                </section>
+
+                <!-- Module 9: Research Evolution -->
+                <section id="module-evolution" class="module-section">
+                    <div class="section-header">
+                        <h1 class="section-title">Chronological Research Evolution Analysis</h1>
+                        <p class="section-subtitle">Timeline tracking how technologies, methodologies, and limitations evolved across publication years.</p>
+                    </div>
+                    <div id="evolution-container"></div>
+                </section>
+
+                <!-- Module 10: Research Gaps -->
+                <section id="module-gaps" class="module-section">
+                    <div class="section-header">
+                        <h1 class="section-title">Research Gap Discovery Engine</h1>
+                        <p class="section-subtitle">Evidence-backed research gaps classified across 8 categories (Methodological, Dataset, Performance, Practical, Explainability, Generalization, Security, Evaluation).</p>
+                    </div>
+                    <div id="gaps-container"></div>
+                </section>
+
+                <!-- Module 11: Novelty Analysis -->
+                <section id="module-novelty" class="module-section">
+                    <div class="section-header">
+                        <h1 class="section-title">Defensible Novelty Analysis</h1>
+                        <p class="section-subtitle">Technical, methodological, and practical differentiation of your project from existing reference literature with confidence grading.</p>
+                    </div>
+                    <div id="novelty-container"></div>
+                </section>
+
+                <!-- Module 12: Contributions -->
+                <section id="module-contributions" class="module-section">
+                    <div class="section-header">
+                        <h1 class="section-title">Realistic Research Contribution Generator</h1>
+                        <p class="section-subtitle">Defensible research contributions derived from your actual project documentation and research evidence.</p>
+                    </div>
+                    <div id="contributions-container"></div>
+                </section>
+
+                <!-- Module 13: Pre-Generation Review -->
+                <section id="module-review" class="module-section">
+                    <div class="section-header">
+                        <h1 class="section-title">Pre-Generation User Review & Outline Editor</h1>
+                        <p class="section-subtitle">Review the consolidated research understanding and edit the proposed IEEE paper outline before generating the manuscript.</p>
+                    </div>
+                    <div id="user-review-container"></div>
+                </section>
+
+                <!-- Module 14: IEEE Manuscript Generator -->
+                <section id="module-generator" class="module-section">
+                    <div class="section-header">
+                        <h1 class="section-title">IEEE Paper Manuscript Generator</h1>
+                        <p class="section-subtitle">Publication-grade IEEE manuscript (Sections I to XII) generated with citation intelligence and natural academic tone.</p>
+                    </div>
+                    <div id="manuscript-viewer">
+                        <div class="card" style="text-align:center; padding:48px;">
+                            <h3>No Manuscript Generated Yet</h3>
+                            <p style="color:#94A3B8; margin-bottom:16px;">Click the button below to run the section-by-section IEEE paper generator.</p>
+                            <button class="btn btn-primary" onclick="triggerPaperGeneration()">Generate Complete IEEE Manuscript</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Module 15: Quality Audit -->
+                <section id="module-quality" class="module-section">
+                    <div class="section-header">
+                        <h1 class="section-title">Research Paper Quality Checker</h1>
+                        <p class="section-subtitle">Automated 10-point audit assessing technical accuracy, literature consistency, citation accuracy, and overall research readiness.</p>
+                    </div>
+                    <div id="quality-container"></div>
+                </section>
+
+                <!-- Module 16: Multi-Export -->
+                <section id="module-export" class="module-section">
+                    <div class="section-header">
+                        <h1 class="section-title">Multi-Format Paper Exporter</h1>
+                        <p class="section-subtitle">Export your complete IEEE research paper into DOCX, LaTeX (.tex), Markdown (.md), or PDF formats.</p>
+                    </div>
+
+                    <div class="grid-3">
+                        <div class="card" style="text-align:center;">
+                            <h3 style="margin-bottom:12px;">DOCX Document</h3>
+                            <p style="color:#94A3B8; font-size:0.85rem; margin-bottom:16px;">Formatted Microsoft Word (.docx) manuscript ready for submission.</p>
+                            <button class="btn btn-primary" onclick="downloadExport('docx')">Download DOCX</button>
+                        </div>
+                        <div class="card" style="text-align:center;">
+                            <h3 style="margin-bottom:12px;">LaTeX Source (.tex)</h3>
+                            <p style="color:#94A3B8; font-size:0.85rem; margin-bottom:16px;">Standard IEEEtran LaTeX source code for Overleaf / TeX compilers.</p>
+                            <button class="btn btn-primary" onclick="downloadExport('latex')">Download LaTeX</button>
+                        </div>
+                        <div class="card" style="text-align:center;">
+                            <h3 style="margin-bottom:12px;">Markdown Document</h3>
+                            <p style="color:#94A3B8; font-size:0.85rem; margin-bottom:16px;">Clean Markdown (.md) version for notes and documentation.</p>
+                            <button class="btn btn-primary" onclick="downloadExport('markdown')">Download Markdown</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

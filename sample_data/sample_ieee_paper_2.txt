@@ -1,0 +1,18 @@
+Title: Vision Transformer Architectures for Real-Time Crop Pathology Classification
+Authors: A. Patel, H. Zhang, L. Miller
+Venue: IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2023
+DOI: 10.1109/CVPR.2023.2049182
+
+ABSTRACT:
+Vision Transformers (ViT) have revolutionized image classification by capturing long-range spatial dependencies. We introduce CropViT, a self-attention transformer framework for multi-class plant leaf disease diagnosis. CropViT achieves 97.8% classification accuracy on a 30,000-image dataset, outperforming conventional CNN backbones.
+
+RESEARCH PROBLEM:
+CNNs struggle with non-local disease symptoms distributed across complex leaf structures.
+
+METHODOLOGY & ALGORITHMS:
+Transformer self-attention blocks with multi-head attention (12 heads), patch size 16x16, trained using AdamW optimizer for 100 epochs.
+
+LIMITATIONS:
+1. High FLOPs and parameter count (305 MB weight file).
+2. Fails to run on mobile edge devices without cloud API connectivity.
+3. Severe accuracy degradation when test samples contain severe leaf occlusion or dirt noise.
